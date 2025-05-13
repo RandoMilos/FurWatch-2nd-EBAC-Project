@@ -56,16 +56,15 @@ const createShowCard = (show) => { //Function to create a showcard on the main p
     return card;
 };
 
-const createSelectedShow = (show) => { //Function to create the selected show on the DOM
+const createSelectedShow = (show) => {
+    const safeText = (val, fallback = 'No disponible') => val ?? fallback;
+
     const showContainer = document.createElement('div');
     showContainer.classList.add('selected-show-container');
 
     const showInfoMainContainer = document.createElement('div');
-    showInfoMainContainer.classList.add('show-info-main-container')
-    showContainer.appendChild(showInfoMainContainer)
-
-    const showEpisodesContainer = document.createElement('div');
-    showEpisodesContainer.classList.add('show-episodes-container')
+    showInfoMainContainer.classList.add('show-info-main-container');
+    showContainer.appendChild(showInfoMainContainer);
 
     const shortInfoDiv = document.createElement('div');
     shortInfoDiv.classList.add('short-info-div');
@@ -76,30 +75,33 @@ const createSelectedShow = (show) => { //Function to create the selected show on
 
     const imageShort = document.createElement('img');
     imageShort.classList.add("short-image");
-    imageShort.src = show.image.original;
-    imageShort.alt = `${show.name} image`;
+    imageShort.src = show.image?.original ?? 'img/fallback.jpg';
+    imageShort.alt = `${safeText(show.name)} image`;
     imageDiv.appendChild(imageShort);
 
     const selectedShowTitle = document.createElement('h2');
     selectedShowTitle.classList.add('selected-show-title');
-    selectedShowTitle.textContent = show.name;
+    selectedShowTitle.textContent = safeText(show.name);
+    shortInfoDiv.appendChild(selectedShowTitle);
 
     const showGenres = document.createElement('div');
     showGenres.classList.add('show-genres');
-
-    show.genres.forEach((genre) => {
-        const genreSpan = document.createElement('span');
-        genreSpan.classList.add('show-genre', genre);
-        genreSpan.textContent = genre;
-        showGenres.appendChild(genreSpan);
-    });
+    if (Array.isArray(show.genres)) {
+        show.genres.forEach((genre) => {
+            const genreSpan = document.createElement('span');
+            genreSpan.classList.add('show-genre', genre);
+            genreSpan.textContent = genre;
+            showGenres.appendChild(genreSpan);
+        });
+    }
+    shortInfoDiv.appendChild(showGenres);
 
     const showRatingDiv = document.createElement('div');
     showRatingDiv.classList.add('show-rating');
 
     const showRating = document.createElement('p');
     showRating.classList.add('show-rating-text');
-    showRating.textContent = `${show.rating.average} / 10`;
+    showRating.textContent = `${safeText(show.rating?.average, 'N/A')} / 10`;
 
     const showRatingIcon = document.createElement('img');
     showRatingIcon.src = "img/star.svg";
@@ -108,62 +110,56 @@ const createSelectedShow = (show) => { //Function to create the selected show on
 
     showRatingDiv.appendChild(showRatingIcon);
     showRatingDiv.appendChild(showRating);
+    shortInfoDiv.appendChild(showRatingDiv);
 
     const showLanguage = document.createElement('p');
     showLanguage.classList.add('show-lang-text');
-    showLanguage.textContent = `Lenguaje: ${show.language}`;
+    showLanguage.textContent = `Lenguaje: ${safeText(show.language)}`;
+    shortInfoDiv.appendChild(showLanguage);
 
     const longInfoDiv = document.createElement('div');
     longInfoDiv.classList.add('show-long-info-div');
 
     const showLongInfo = document.createElement('p');
     showLongInfo.classList.add('show-long-info-text');
-    showLongInfo.innerHTML = show.summary;
+    showLongInfo.innerHTML = safeText(show.summary, 'No hay descripción disponible.');
+    longInfoDiv.appendChild(showLongInfo);
 
     const showNetwork = document.createElement('p');
     showNetwork.classList.add('show-long-network');
-    showNetwork.textContent = `Cadena: ${show.network?.name}` || 'No network info';
+    showNetwork.textContent = `Cadena: ${safeText(show.network?.name, 'No network info')}`;
+    longInfoDiv.appendChild(showNetwork);
 
     const showNetworkCountry = document.createElement('p');
     showNetworkCountry.classList.add('show-long-net-country');
-    showNetworkCountry.textContent = `Pais de Origen: ${show.network?.country?.name}` || 'No country info';
-
-    shortInfoDiv.appendChild(selectedShowTitle);
-    shortInfoDiv.appendChild(showGenres);
-    shortInfoDiv.appendChild(showRatingDiv);
-    shortInfoDiv.appendChild(showLanguage);
-
-    longInfoDiv.appendChild(showLongInfo);
-    longInfoDiv.appendChild(showNetwork);
+    showNetworkCountry.textContent = `País de Origen: ${safeText(show.network?.country?.name, 'No country info')}`;
     longInfoDiv.appendChild(showNetworkCountry);
 
-    showInfoMainContainer.appendChild(shortInfoDiv); 
-    showInfoMainContainer.appendChild(longInfoDiv); 
+    showInfoMainContainer.appendChild(shortInfoDiv);
+    showInfoMainContainer.appendChild(longInfoDiv);
 
     const showEPGridTitle = document.createElement('p');
     showEPGridTitle.classList.add('show-ep-title');
-    showEPGridTitle.textContent = 'Lista de Episodios:'
+    showEPGridTitle.textContent = 'Lista de Episodios:';
     showContainer.appendChild(showEPGridTitle);
-            
 
-    
     const showEpGrid = document.getElementById('show-ep-grid');
-    
+    if (showEpGrid) {
+        showContainer.appendChild(showEpGrid);
+    }
 
-    if (showEpGrid) showContainer.appendChild(showEpGrid); //If to instert the show episodes grid if it exists on the DOM
-
-    const createEpisodesGrid = (ep) => { //Function to create the show episode grids
+    const createEpisodesGrid = (ep) => {
         const epInfoDiv = document.createElement('div');
         epInfoDiv.classList.add('ep-info-div');
 
         const epImage = document.createElement('img');
         epImage.classList.add('ep-info-img');
-        epImage.src = ep.image?.medium || '';
-        epImage.alt = `${ep.name} image`;
+        epImage.src = ep.image?.medium ?? 'img/fallback.jpg';
+        epImage.alt = `${safeText(ep.name)} image`;
 
         const epName = document.createElement('p');
         epName.classList.add('ep-name');
-        epName.textContent = `Episodio: ${ep.name}`;
+        epName.textContent = `Episodio: ${safeText(ep.name)}`;
 
         epInfoDiv.appendChild(epImage);
         epInfoDiv.appendChild(epName);
@@ -171,19 +167,16 @@ const createSelectedShow = (show) => { //Function to create the selected show on
         return epInfoDiv;
     };
 
-    async function fetchShowEpisodes(show) { //Function to fetch the selected show episode from the API
+    async function fetchShowEpisodes(show) {
         try {
-
             const epRes = await axios.get(`https://api.tvmaze.com/shows/${show.id}/episodes`);
             const showEPS = epRes.data;
-            if (showEpGrid) 
-                showEpGrid.innerHTML = "";
+            if (showEpGrid) showEpGrid.innerHTML = "";
 
             for (const ep of showEPS) {
                 if (!ep || !ep.season || !ep.number) continue;
                 const epCard = createEpisodesGrid(ep);
-                if (showEpGrid) 
-                    showEpGrid.appendChild(epCard);
+                if (showEpGrid) showEpGrid.appendChild(epCard);
             }
         } catch (error) {
             console.error("Error al obtener episodios:", error);
