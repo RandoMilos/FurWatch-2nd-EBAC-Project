@@ -154,7 +154,7 @@ const createSelectedShow = (show) => {
 
         const epImage = document.createElement('img');
         epImage.classList.add('ep-info-img');
-        epImage.src = ep.image?.medium ?? 'img/fallback.jpg';
+        epImage.src = ep.image?.medium ?? 'img/fallback.png';
         epImage.alt = `${safeText(ep.name)} image`;
 
         const epName = document.createElement('p');
