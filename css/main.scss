@@ -42,11 +42,19 @@ header{
             display: none;
         }
     }
+    .mobileMenuIcon{
+        display: none;
+        @include respond-to('big-cellphone'){
+            display: block;
+        }
+    }
 
 
 }
 
 main{
+
+    
     .despegable-menu{
         background-color: $darkBlue;
         position: absolute;
@@ -238,7 +246,7 @@ main{
 
     .short-info-div{
         @include setFlex(column, flex-start, flex-start);
-        width: 354%;
+        width: 50%;
         padding: 0 .3rem;
         
     }

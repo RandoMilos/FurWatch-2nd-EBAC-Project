@@ -49,6 +49,14 @@ header .menu-button {
     display: none;
   }
 }
+header .mobileMenuIcon {
+  display: none;
+}
+@media (max-width: 665px) {
+  header .mobileMenuIcon {
+    display: block;
+  }
+}
 
 main .despegable-menu {
   background-color: #1B1833;
@@ -258,7 +266,7 @@ main .short-info-div {
   justify-content: flex-start;
   align-items: flex-start;
   box-sizing: border-box;
-  width: 354%;
+  width: 50%;
   padding: 0 0.3rem;
 }
 main .short-image-div {
