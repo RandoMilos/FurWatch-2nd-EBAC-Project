@@ -301,6 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (path.includes('selectedShow.html')) { //If to check the user actual page to load the content the user needs
         const selectedShow = JSON.parse(localStorage.getItem('show'));
         const selectedShowDiv = document.getElementById('showDiv');
+        //comment to deplos
         
         console.log("selectedShow", selectedShow);
         console.log("selectedShowDiv", selectedShowDiv);
