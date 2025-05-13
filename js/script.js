@@ -302,6 +302,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedShow = JSON.parse(localStorage.getItem('show'));
         const selectedShowDiv = document.getElementById('showDiv');
         
+        console.log("selectedShow", selectedShow);
+        console.log("selectedShowDiv", selectedShowDiv);
+
+        if (!selectedShow) {
+        alert("No se encontró el show en localStorage");
+        }
+        if (!selectedShowDiv) {
+        alert("No se encontró el div showDiv");
+        }
+        
         if (selectedShow && selectedShowDiv) {
             const showElement = createSelectedShow(selectedShow);
             selectedShowDiv.appendChild(showElement);
