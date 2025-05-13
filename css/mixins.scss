@@ -1,0 +1,16 @@
+@mixin setFlex( $fd: row, $jc: center, $ai: center) { //Mixing to set flex properties
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
+    box-sizing: border-box;
+}
+
+@mixin respond-to($breakpoint) {
+    @if $breakpoint == 'tablet' {
+        @media (max-width: 823px) { @content; }
+    }
+    @else if $breakpoint == 'big-cellphone'{
+        @media (max-width: 665px) { @content; }
+    }
+}

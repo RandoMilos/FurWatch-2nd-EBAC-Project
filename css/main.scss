@@ -1,0 +1,297 @@
+@import "variables.scss";
+@import "mixins.scss";
+
+html{
+    font-size: $baseFontSize;
+}
+
+body{
+    background-color: $creamWhite;
+    margin: 0;
+}
+
+header{
+    @include setFlex();
+    @include respond-to('big-cellphone'){
+        @include setFlex(row, space-between, center)
+    };
+    width: 100%;
+    gap: 3rem;
+    padding: 1rem;
+    background: linear-gradient(0.25turn, $darkBlue, #040194, #5005db);
+    img{
+        width: 3rem;
+    }
+    
+    
+    button{
+        background-color: transparent;
+        border: none;
+        color: $semiWhite;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+    a{
+        text-decoration: none;
+        color: $semiWhite;
+    }
+
+    .menu-button{
+        display: block;
+        @include respond-to('big-cellphone'){
+            display: none;
+        }
+    }
+
+
+}
+
+main{
+    .despegable-menu{
+        background-color: $darkBlue;
+        position: absolute;
+        z-index: 1050;
+        color: $semiWhite;
+        left: 0;
+        width: 85%;
+        height: 100%;
+        padding: 1rem;
+        box-shadow: 10px 2px 25px rgba(0, 0, 0, 0.603);
+        transition: all 0.25s ease-in-out;
+        p{
+            padding: .5rem 1rem;
+            font-weight: 700;
+        }
+    }
+
+    .dmenu-hidden{
+        left: -100%;
+    }
+    
+    
+    
+    .mainBannerImg{
+        height: 425px;     
+        width: 100%;      
+        object-fit: cover;
+        object-position: center; 
+    }
+    h2{
+        font-size: 1.9rem;
+        font-weight: 600;
+        color: $darkBlue;
+        text-align: center;
+        padding: 1.5rem;
+    }
+    .shows-grid{
+        width: 90%;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(328px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+        @include respond-to('tablet'){
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        }
+    }
+    .show-card{
+        @include setFlex(column, flex-start, center);
+        background-color: $semiWhite;
+        border-radius: 1rem;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        transition: .25s all;
+    }
+
+    .show-card:hover{
+        box-shadow: 1px 1px 30px rgba(37, 37, 37, 0.5);
+        transform: scale(1.006);
+        cursor: pointer;
+    }
+
+    .show-image-container{
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        border-top-right-radius: 1rem;
+        border-top-left-radius: 1rem;
+        @include respond-to('tablet'){
+            height: 350px
+        };
+    }
+    .show-image{
+        width: 100%;
+        height: 30rem;
+        object-fit: cover;
+        object-position: center;
+
+    }
+    .show-name{
+        font-size: 2rem;
+        font-weight: 550;
+        color: $nightPurple;
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    .show-info{
+        @include setFlex(column, center, center);
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .show-genres{
+        @include setFlex(row, center, flex-start);
+        width: auto;
+    }
+
+    .show-genre{
+        font-size: 1rem;
+        padding: .4rem;
+        margin: .4rem;
+        color: $semiWhite;
+        font-weight: 700;
+        border-radius: 1rem;
+        background-color: $nightBlue;
+        &.Drama{
+            background-color: $dramaColor;
+        }
+        &.Science-Fiction{
+            background-color: $scifiColor;
+        }
+        &.Thriller{
+            background-color: $thrillerColor;
+        }
+        &.Crime{
+            background-color: $crimeColor;
+        }
+        &.Action{
+            background-color: $actionColor;
+        }
+        &.Horror{
+            background-color: $horrorColor;
+        }
+        &.Romance{
+            background-color: $romanceColor;
+        }
+        &.Adventure{
+            background-color: $adventureColor;
+        }
+        &.Espionage{
+            background-color: $espionageColor;
+        }
+        &.Music{
+            background-color: $musicColor;
+        }
+        &.Mystery{
+            background-color: $mysteryColor;
+        }
+        &.History{
+            background-color: $historyColor;
+        }
+        &.Fantasy{
+            background-color: $darkBlue;
+        }
+        &.Family{
+            background-color: $familyColor;
+        }
+        &.Anime{
+            background-color: $animeColor;
+        }
+        &.Comedy{
+            background-color: $comedyColor;
+        }
+        &.Legal{
+            background-color: $legalColor;
+        }
+        &.Supernatural{
+            background-color: #040194;
+        }
+        
+    }
+    .show-rating{
+        @include setFlex(row, center, center);
+        background-color: $electricOrange;
+        border-radius: 1rem;
+        padding: .1rem .5rem;
+        margin-bottom: 1rem;
+    }
+
+    .show-rating-text{
+        color: $semiWhite;
+        padding: .2rem;
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .selected-show-container{
+        padding: 2.1rem;
+    }
+
+    .show-info-main-container{
+        @include setFlex(row, center, flex-start);
+        gap: 1rem;
+        height: auto;
+        margin-bottom: 4.5rem;
+    }
+
+    .short-info-div{
+        @include setFlex(column, flex-start, flex-start);
+        width: 354%;
+        padding: 0 .3rem;
+        
+    }
+    .short-image-div{
+        width: 20rem;
+    }
+
+    .short-image{
+        width: 20rem;
+        border-radius: 1rem;
+    }
+
+    .selected-show-title{
+        margin: 0;
+        padding: 0 0 1.5rem 0;
+        font-size: 3rem;
+        color: $darkBlue;
+    }
+    
+    .show-lang-text{
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .show-long-info-text{
+        font-size: 1.5rem;
+        color: $darkBlue;
+    }
+    .show-long-network{
+        font-size: 1.3rem;
+        font-weight: 550;
+    }
+
+    .show-long-net-country{
+        font-size: 1.2rem;
+        color: $nightPurple;
+    }
+
+    .show-ep-title{
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
+
+    #show-ep-grid{
+        display: grid;
+        grid-template-columns: repeat(7, minmax(150px, 1fr));
+    }
+
+    .ep-info-img{
+        border-radius: .3rem;
+    }
+
+    .ep-name{
+        font-weight: 600;
+    }
+}

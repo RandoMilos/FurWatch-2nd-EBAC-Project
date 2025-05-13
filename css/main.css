@@ -1,0 +1,306 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: #F8EDED;
+  margin: 0;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  gap: 3rem;
+  padding: 1rem;
+  background: linear-gradient(0.25turn, #1B1833, #040194, #5005db);
+}
+@media (max-width: 665px) {
+  header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+  }
+}
+header img {
+  width: 3rem;
+}
+header button {
+  background-color: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+header a {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+header .menu-button {
+  display: block;
+}
+@media (max-width: 665px) {
+  header .menu-button {
+    display: none;
+  }
+}
+
+main .despegable-menu {
+  background-color: #1B1833;
+  position: absolute;
+  z-index: 1050;
+  color: #FFFFFF;
+  left: 0;
+  width: 85%;
+  height: 100%;
+  padding: 1rem;
+  box-shadow: 10px 2px 25px rgba(0, 0, 0, 0.603);
+  transition: all 0.25s ease-in-out;
+}
+main .despegable-menu p {
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+}
+main .dmenu-hidden {
+  left: -100%;
+}
+main .mainBannerImg {
+  height: 425px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+main h2 {
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: #1B1833;
+  text-align: center;
+  padding: 1.5rem;
+}
+main .shows-grid {
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(328px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+@media (max-width: 823px) {
+  main .shows-grid {
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  }
+}
+main .show-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+  border-radius: 1rem;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  transition: 0.25s all;
+}
+main .show-card:hover {
+  box-shadow: 1px 1px 30px rgba(37, 37, 37, 0.5);
+  transform: scale(1.006);
+  cursor: pointer;
+}
+main .show-image-container {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+}
+@media (max-width: 823px) {
+  main .show-image-container {
+    height: 350px;
+  }
+}
+main .show-image {
+  width: 100%;
+  height: 30rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+main .show-name {
+  font-size: 2rem;
+  font-weight: 550;
+  color: #441752;
+  text-align: center;
+  padding: 1rem;
+}
+main .show-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  gap: 1rem;
+}
+main .show-genres {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: auto;
+}
+main .show-genre {
+  font-size: 1rem;
+  padding: 0.4rem;
+  margin: 0.4rem;
+  color: #FFFFFF;
+  font-weight: 700;
+  border-radius: 1rem;
+  background-color: #173B45;
+}
+main .show-genre.Drama {
+  background-color: #102E50;
+}
+main .show-genre.Science-Fiction {
+  background-color: #03345c;
+}
+main .show-genre.Thriller {
+  background-color: #1B1833;
+}
+main .show-genre.Crime {
+  background-color: #11018f;
+}
+main .show-genre.Action {
+  background-color: #eeb335;
+}
+main .show-genre.Horror {
+  background-color: #d39205;
+}
+main .show-genre.Romance {
+  background-color: #b60c0c;
+}
+main .show-genre.Adventure {
+  background-color: #b67e06;
+}
+main .show-genre.Espionage {
+  background-color: #b16f0d;
+}
+main .show-genre.Music {
+  background-color: #da6c1d;
+}
+main .show-genre.Mystery {
+  background-color: #a14000;
+}
+main .show-genre.History {
+  background-color: #BE3D2A;
+}
+main .show-genre.Fantasy {
+  background-color: #1B1833;
+}
+main .show-genre.Family {
+  background-color: #F2A900;
+}
+main .show-genre.Anime {
+  background-color: #d65b08;
+}
+main .show-genre.Comedy {
+  background-color: #207000;
+}
+main .show-genre.Legal {
+  background-color: #2d004b;
+}
+main .show-genre.Supernatural {
+  background-color: #040194;
+}
+main .show-rating {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #FF8225;
+  border-radius: 1rem;
+  padding: 0.1rem 0.5rem;
+  margin-bottom: 1rem;
+}
+main .show-rating-text {
+  color: #FFFFFF;
+  padding: 0.2rem;
+  margin: 0;
+  font-weight: 600;
+}
+main .selected-show-container {
+  padding: 2.1rem;
+}
+main .show-info-main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  gap: 1rem;
+  height: auto;
+  margin-bottom: 4.5rem;
+}
+main .short-info-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-sizing: border-box;
+  width: 354%;
+  padding: 0 0.3rem;
+}
+main .short-image-div {
+  width: 20rem;
+}
+main .short-image {
+  width: 20rem;
+  border-radius: 1rem;
+}
+main .selected-show-title {
+  margin: 0;
+  padding: 0 0 1.5rem 0;
+  font-size: 3rem;
+  color: #1B1833;
+}
+main .show-lang-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+main .show-long-info-text {
+  font-size: 1.5rem;
+  color: #1B1833;
+}
+main .show-long-network {
+  font-size: 1.3rem;
+  font-weight: 550;
+}
+main .show-long-net-country {
+  font-size: 1.2rem;
+  color: #441752;
+}
+main .show-ep-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+main #show-ep-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(150px, 1fr));
+}
+main .ep-info-img {
+  border-radius: 0.3rem;
+}
+main .ep-name {
+  font-weight: 600;
+}/*# sourceMappingURL=main.css.map */
