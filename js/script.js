@@ -188,7 +188,7 @@ const createSelectedShow = (show) => {
 };
 
 const toShow = (show) => { //Function to save the selected show to the Local Storage
-    localStorage.setItem('show', JSON.stringify(show));
+    localStorage.setItem("selectedShow", JSON.stringify(show));
     window.location.assign("selectedShow.html");
 };
 
@@ -295,9 +295,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedShow = JSON.parse(localStorage.getItem('show'));
         const selectedShowDiv = document.getElementById('showDiv');
 
-        console.log("selectedShow", selectedShow);
-        console.log("selectedShowDiv", selectedShowDiv);
-        
         if (!selectedShow) {
           alert("No se encontró el show en localStorage");
         }
