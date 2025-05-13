@@ -204,8 +204,10 @@ function endDateShow(show) { //Function to change the show end value from string
     show.IntEDate = parseInt(cleanEDate);
 }
 
-async function loadMainShows() { //Function to load the show main page
+async function loadMainShows() {
     const showGrid = document.getElementById('shows-grid');
+    if (!showGrid) return; // Evita errores si el elemento no existe
+
     try {
         const res = await axios.get("https://api.tvmaze.com/shows");
         const shows = res.data;
@@ -225,6 +227,7 @@ async function loadMainShows() { //Function to load the show main page
 
 async function loadBestShows() { //Function to load the best shows
     const showGrid = document.getElementById('shows-grid');
+    if (!showGrid) return;
     try {
         const res = await axios.get("https://api.tvmaze.com/shows", { params: { limit: 50 } });
         const shows = res.data;
@@ -245,6 +248,7 @@ async function loadBestShows() { //Function to load the best shows
 
 async function loadNewStuff() { //Function to load the latest shows
     const showGrid = document.getElementById('shows-grid');
+    if (!showGrid) return;
     try {
         const res = await axios.get("https://api.tvmaze.com/shows", { params: { limit: 50 } });
         const shows = res.data;
@@ -268,6 +272,7 @@ async function loadNewStuff() { //Function to load the latest shows
 
 async function loadClassics() { //Function to load the section classics show
     const showGrid = document.getElementById('shows-grid');
+    if (!showGrid) return;
     try {
         const res = await axios.get("https://api.tvmaze.com/shows", { params: { limit: 50 } });
         const shows = res.data;
@@ -306,7 +311,8 @@ document.addEventListener('DOMContentLoaded', () => {
         loadNewStuff();
     } else if (path.includes('classics.html')) {
         loadClassics();
-    } else {
+    } 
+    else {
         loadMainShows();
     }
 
