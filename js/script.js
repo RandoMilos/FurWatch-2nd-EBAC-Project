@@ -296,6 +296,7 @@ async function loadClassics() { //Function to load the section classics show
 
 document.addEventListener('DOMContentLoaded', () => {
     const path = window.location.pathname;
+    console.log('DOM Loaded')
 
     if (path.includes('selectedShow.html')) { //If to check the user actual page to load the content the user needs
         const selectedShow = JSON.parse(localStorage.getItem('show'));
