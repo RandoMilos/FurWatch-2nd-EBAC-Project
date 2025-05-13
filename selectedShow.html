@@ -14,28 +14,21 @@
     <title>FurWatch</title>
 </head>
 <body>
-    <script>
+<script>
     document.addEventListener("DOMContentLoaded", () => {
-        const fakeShow = {
-        id: 1,
-        name: "Fake Show",
-        genres: ["Drama", "Sci-Fi"],
-        rating: { average: 8.5 },
-        image: { original: "https://via.placeholder.com/200x300" },
-        language: "Español",
-        summary: "<p>Resumen falso para prueba.</p>",
-        network: {
-            name: "Fake Network",
-            country: { name: "Fake Country" }
-        }
-        };
+        const container = document.getElementById("selected-show-container");
+        const showData = localStorage.getItem("selectedShow");
 
-    localStorage.setItem("selectedShow", JSON.stringify(fakeShow));
-    const container = document.getElementById("selected-show-container");
-    const showElement = createSelectedShow(fakeShow);
-    container.appendChild(showElement);
-  });
+        if (showData && container) {
+            const show = JSON.parse(showData);
+            const showElement = createSelectedShow(show);
+            container.appendChild(showElement);
+        } else {
+            container.textContent = "No hay información para mostrar.";
+        }
+    });
 </script>
+
     <header>
         <button id="mobile-menu-icon" class="mobileMenuIcon"><img src="img/menu.svg" alt="Menu Icon"></button>
         <button class="menu-button"><a href="index.html">FurWatch</a></button>
