@@ -8,6 +8,13 @@ html{
 body{
     background-color: $creamWhite;
     margin: 0;
+
+    .noscroll{
+        overflow-y: hidden;
+    }
+    .scroll{
+        overflow: auto;
+    }
 }
 
 header{
@@ -62,7 +69,7 @@ main{
         color: $semiWhite;
         left: 0;
         width: 85%;
-        height: 4000%;
+        height: 400%;
         padding: 1rem;
         box-shadow: 10px 2px 25px rgba(0, 0, 0, 0.603);
         transition: all 0.25s ease-in-out;
@@ -244,6 +251,9 @@ main{
         gap: 1rem;
         height: auto;
         margin-bottom: 4.5rem;
+        @include respond-to('smallPc'){
+            @include setFlex(column, center, center);
+        }
     }
 
     .short-info-div{
@@ -253,7 +263,7 @@ main{
         
     }
     .short-image-div{
-        width: 20rem;
+        width: auto;
     }
 
     .short-image{
@@ -294,11 +304,13 @@ main{
 
     #show-ep-grid{
         display: grid;
-        grid-template-columns: repeat(7, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
     }
 
     .ep-info-img{
         border-radius: .3rem;
+
     }
 
     .ep-name{
