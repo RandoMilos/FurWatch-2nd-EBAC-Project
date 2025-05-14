@@ -187,29 +187,46 @@ const createSelectedShow = (show) => {
         }
     }
 
-    async function fethBook(bookURL) {
+async function fethBook(bookURL) {
     try {
         const bookRes = await axios.get(bookURL);
         const bookData = bookRes.data;
 
+        const bookInfoDiv = document.createElement('div');
+        bookInfoDiv.classList.add('book-info-div');
+
         if (bookData.numFound > 0 && Array.isArray(bookData.docs)) {
-            const book = bookData.docs[0]; // Tomamos el libro más relevante
-            
-            const bookInfoDiv = document.createElement('div');
-            bookInfoDiv.classList.add('book-info-div');
+            const book = bookData.docs[0];
             bookInfoDiv.innerHTML = `
                 <div class="alert alert-success mt-4">
-                    Basado en libro: <strong>${book.title}</strong><br>
+                    📚 <strong>Basado en un libro</strong><br>
+                    Título: <strong>${book.title}</strong><br>
                     Autor: <em>${book.author_name?.join(', ') ?? 'Autor desconocido'}</em><br>
                     <a href="https://openlibrary.org${book.key}" target="_blank">Ver en Open Library 📖</a>
                 </div>
             `;
-            showContainer.appendChild(bookInfoDiv);
+        } else {
+            bookInfoDiv.innerHTML = `
+                <div class="alert alert-warning mt-4">
+                    ⚠️ No se encontró evidencia de que este show esté basado en un libro.
+                </div>
+            `;
         }
+
+        showContainer.appendChild(bookInfoDiv);
     } catch (error) {
         console.error("Error al obtener datos del libro:", error);
+
+        const errorDiv = document.createElement('div');
+        errorDiv.classList.add('book-info-div');
+        errorDiv.innerHTML = `
+            <div class="alert alert-danger mt-4">
+                ❌ Ocurrió un error al verificar si está basado en un libro.
+            </div>
+        `;
+        showContainer.appendChild(errorDiv);
+        }
     }
-}
 
     fetchShowEpisodes(show);
     fethBook(bookURL);
