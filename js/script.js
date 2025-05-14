@@ -299,10 +299,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedShowDiv = document.getElementById('showDiv');
 
         if (!selectedShow) {
-        alert("No se encontró el show en localStorage");
+          alert("No se encontró el show en localStorage");
         }
         if (!selectedShowDiv) {
-        alert("No se encontró el div showDiv");
+          alert("No se encontró el div showDiv");
         }
         
         if (selectedShow && selectedShowDiv) {
