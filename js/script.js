@@ -199,7 +199,6 @@ function endDateShow(show) { //Function to change the show end value from string
 
 async function loadMainShows() {
     const showGrid = document.getElementById('shows-grid');
-    console.log(`Si estas leyendo esto es la funcion main y el path es ${window.location.pathname}`);
     if (!showGrid) return; // Evita errores si el elemento no existe
 
     try {
@@ -220,7 +219,6 @@ async function loadMainShows() {
 }
 
 async function loadBestShows() { //Function to load the best shows
-    console.log(`Si estas leyendo esto es la funcion best y el path es ${window.location.pathname}`);
     const showGrid = document.getElementById('shows-grid');
     if (!showGrid) return;
     try {
@@ -242,7 +240,6 @@ async function loadBestShows() { //Function to load the best shows
 }
 
 async function loadNewStuff() { //Function to load the latest shows
-    console.log(`Si estas leyendo esto es la funcion new y el path es ${window.location.pathname}`);
     const showGrid = document.getElementById('shows-grid');
     if (!showGrid) return;
     try {
@@ -267,7 +264,6 @@ async function loadNewStuff() { //Function to load the latest shows
 }
 
 async function loadClassics() { //Function to load the section classics show
-    console.log(`Si estas leyendo esto es la funcion classic y el path es ${window.location.pathname}`);
     const showGrid = document.getElementById('shows-grid');
     if (!showGrid) return;
     try {
@@ -311,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     } else if (path.includes('/thebest')) {
         loadBestShows();
-    } else if (path.includes('/newStuff')) {
+    } else if (path.includes('/newstuff')) {
         loadNewStuff();
     } else if (path.includes('/classics')) {
         loadClassics();
