@@ -63,7 +63,7 @@ const createSelectedShow = (show) => {
     const showNameQuery = encodeURIComponent(showName); //constant to get the show name into query
     const bookURL = `https://openlibrary.org/search.json?q=${showNameQuery}`; //constant to look into the book API with the query format 
 
-    const showContainer = document.createElement('div');
+    const showContainer = document.createElement('div'); 
     showContainer.classList.add('selected-show-container');
 
     const showInfoMainContainer = document.createElement('div');
@@ -90,7 +90,7 @@ const createSelectedShow = (show) => {
 
     const showGenres = document.createElement('div');
     showGenres.classList.add('show-genres');
-    if (Array.isArray(show.genres)) {
+    if (Array.isArray(show.genres)) { //Array to create multiple genres span if exists
         show.genres.forEach((genre) => {
             const genreSpan = document.createElement('span');
             genreSpan.classList.add('show-genre', genre);
@@ -171,7 +171,7 @@ const createSelectedShow = (show) => {
         return epInfoDiv;
     };
 
-    async function fetchShowEpisodes(show) {
+    async function fetchShowEpisodes(show) { //Function to fetch episodes from a show
         try {
             const epRes = await axios.get(`https://api.tvmaze.com/shows/${show.id}/episodes`);
             const showEPS = epRes.data;
@@ -187,7 +187,7 @@ const createSelectedShow = (show) => {
         }
     }
 
-async function fethBook(bookURL) {
+async function fethBook(bookURL) { //Function to fetch book data from the show if it exists
     try {
         const bookRes = await axios.get(bookURL);
         const bookData = bookRes.data;
@@ -196,15 +196,29 @@ async function fethBook(bookURL) {
         bookInfoDiv.classList.add('book-info-div');
 
         if (bookData.numFound > 0 && Array.isArray(bookData.docs)) {
-            const book = bookData.docs[0];
-            bookInfoDiv.innerHTML = `
-                <div class="alert alert-success mt-4">
-                    📚 <strong>Basado en un libro</strong><br>
-                    Título: <strong>${book.title}</strong><br>
-                    Autor: <em>${book.author_name?.join(', ') ?? 'Autor desconocido'}</em><br>
-                    <a href="https://openlibrary.org${book.key}" target="_blank">Ver en Open Library 📖</a>
-                </div>
-            `;
+            const normalizedShowName = show.name.toLowerCase().replace(/[^\w\s]/gi, '').trim();
+
+            const bestMatch = bookData.docs.find(book => {
+                const normalizedBookTitle = (book.title || "").toLowerCase().replace(/[^\w\s]/gi, '').trim();
+                return normalizedBookTitle.includes(normalizedShowName);
+            });
+
+            if (bestMatch) {
+                bookInfoDiv.innerHTML = `
+                    <div class="alert alert-success mt-4">
+                        📚 <strong>Basado en un libro</strong><br>
+                        Título: <strong>${bestMatch.title}</strong><br>
+                        Autor: <em>${bestMatch.author_name?.join(', ') ?? 'Autor desconocido'}</em><br>
+                        <a href="https://openlibrary.org${bestMatch.key}" target="_blank">Ver en Open Library 📖</a>
+                    </div>
+                `;
+            } else {
+                bookInfoDiv.innerHTML = `
+                    <div class="alert alert-warning mt-4">
+                        ⚠️ No se encontró evidencia clara de que este show esté basado en un libro.
+                    </div>
+                `;
+            }
         } else {
             bookInfoDiv.innerHTML = `
                 <div class="alert alert-warning mt-4">
@@ -225,8 +239,8 @@ async function fethBook(bookURL) {
             </div>
         `;
         showContainer.appendChild(errorDiv);
-        }
     }
+}
 
     fetchShowEpisodes(show);
     fethBook(bookURL);
