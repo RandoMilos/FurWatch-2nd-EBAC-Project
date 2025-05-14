@@ -309,11 +309,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const showElement = createSelectedShow(selectedShow);
             selectedShowDiv.appendChild(showElement);
         }
-    } else if (path.includes('theBest.html')) {
+    } else if (path.includes('/thebest')) {
         loadBestShows();
-    } else if (path.includes('newStuff.html')) {
+    } else if (path.includes('/newStuff')) {
         loadNewStuff();
-    } else if (path.includes('classics.html')) {
+    } else if (path.includes('/classics')) {
         loadClassics();
     } 
     else {
