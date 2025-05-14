@@ -58,6 +58,10 @@ const createShowCard = (show) => { //Function to create a showcard on the main p
 
 const createSelectedShow = (show) => {
     const safeText = (val, fallback = 'No disponible') => val ?? fallback;
+    const showName = show.name;
+    
+    const showNameQuery = encodeURIComponent(showName); //constant to get the show name into query
+    const bookURL = `https://openlibrary.org/search.json?q=${showNameQuery}`; //constant to look into the book API with the query format 
 
     const showContainer = document.createElement('div');
     showContainer.classList.add('selected-show-container');
@@ -183,7 +187,49 @@ const createSelectedShow = (show) => {
         }
     }
 
+async function fethBook(bookURL) {
+    try {
+        const bookRes = await axios.get(bookURL);
+        const bookData = bookRes.data;
+
+        const bookInfoDiv = document.createElement('div');
+        bookInfoDiv.classList.add('book-info-div');
+
+        if (bookData.numFound > 0 && Array.isArray(bookData.docs)) {
+            const book = bookData.docs[0];
+            bookInfoDiv.innerHTML = `
+                <div class="alert alert-success mt-4">
+                    📚 <strong>Basado en un libro</strong><br>
+                    Título: <strong>${book.title}</strong><br>
+                    Autor: <em>${book.author_name?.join(', ') ?? 'Autor desconocido'}</em><br>
+                    <a href="https://openlibrary.org${book.key}" target="_blank">Ver en Open Library 📖</a>
+                </div>
+            `;
+        } else {
+            bookInfoDiv.innerHTML = `
+                <div class="alert alert-warning mt-4">
+                    ⚠️ No se encontró evidencia de que este show esté basado en un libro.
+                </div>
+            `;
+        }
+
+        showContainer.appendChild(bookInfoDiv);
+    } catch (error) {
+        console.error("Error al obtener datos del libro:", error);
+
+        const errorDiv = document.createElement('div');
+        errorDiv.classList.add('book-info-div');
+        errorDiv.innerHTML = `
+            <div class="alert alert-danger mt-4">
+                ❌ Ocurrió un error al verificar si está basado en un libro.
+            </div>
+        `;
+        showContainer.appendChild(errorDiv);
+        }
+    }
+
     fetchShowEpisodes(show);
+    fethBook(bookURL);
     return showContainer;
 };
 
@@ -295,10 +341,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedShowDiv = document.getElementById('showDiv');
 
         if (!selectedShow) {
-          alert("No se encontró el show en localStorage");
+            alert("No se encontró el show en localStorage");
         }
         if (!selectedShowDiv) {
-          alert("No se encontró el div showDiv");
+            alert("No se encontró el div showDiv");
         }
         
         if (selectedShow && selectedShowDiv) {
