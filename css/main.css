@@ -6,6 +6,12 @@ body {
   background-color: #F8EDED;
   margin: 0;
 }
+body .noscroll {
+  overflow-y: hidden;
+}
+body .scroll {
+  overflow: auto;
+}
 
 header {
   display: flex;
@@ -71,7 +77,7 @@ main .despegable-menu {
   color: #FFFFFF;
   left: 0;
   width: 85%;
-  height: 4000%;
+  height: 400%;
   padding: 1rem;
   box-shadow: 10px 2px 25px rgba(0, 0, 0, 0.603);
   transition: all 0.25s ease-in-out;
@@ -268,6 +274,15 @@ main .show-info-main-container {
   height: auto;
   margin-bottom: 4.5rem;
 }
+@media (max-width: 1100px) {
+  main .show-info-main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+  }
+}
 main .short-info-div {
   display: flex;
   flex-direction: column;
@@ -278,7 +293,7 @@ main .short-info-div {
   padding: 0 0.3rem;
 }
 main .short-image-div {
-  width: 20rem;
+  width: auto;
 }
 main .short-image {
   width: 20rem;
@@ -312,7 +327,8 @@ main .show-ep-title {
 }
 main #show-ep-grid {
   display: grid;
-  grid-template-columns: repeat(7, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
 }
 main .ep-info-img {
   border-radius: 0.3rem;

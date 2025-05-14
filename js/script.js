@@ -289,7 +289,6 @@ async function loadClassics() { //Function to load the section classics show
 
 document.addEventListener('DOMContentLoaded', () => {
     const path = window.location.pathname;
-    console.log('DOM Loaded')
 
     if (path.includes('selectedShow.html')) { //If to check the user actual page to load the content the user needs
         const selectedShow = JSON.parse(localStorage.getItem('show'));
@@ -316,11 +315,10 @@ document.addEventListener('DOMContentLoaded', () => {
     else {
         loadMainShows();
     }
-
     const cellMenuIcon = document.getElementById('mobile-menu-icon'); //Selection of the mobile menu icon
     const cellMenuBody = document.getElementById('mobile-menu-body'); //Selection of the mobile menu body
 
     cellMenuIcon.addEventListener('click', () => { //Event listener to show and hide the menu
-        cellMenuBody.classList.toggle('dmenu-hidden');
+        cellMenuBody.classList.toggle('dmenu-hidden');;
     });
 });
